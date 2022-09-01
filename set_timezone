@@ -1,0 +1,16 @@
+#!/bin/sh
+
+if [ -z "$TZ" ]; then
+  echo "Info: Please configure timezone (env TZ), defaulting to UTC"
+  export TZ="UTC"
+fi
+
+
+if [ -f /usr/share/zoneinfo/$TZ ]; then
+  echo "Info: Setting timezone to $TZ"
+  echo -e "\n\n[Date]\ndate.timezone = $TZ" >> /usr/local/etc/php/php.ini
+  exit 0
+else
+  echo "Error: Timezone TZ=\"$TZ\""
+  exit 1
+fi
